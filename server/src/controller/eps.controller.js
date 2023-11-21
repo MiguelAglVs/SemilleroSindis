@@ -5,15 +5,9 @@ const epsCtrl = {};
 epsCtrl.createEps = async (req, res) => {
   const { nombre } = req.body;
   try {
-    const sql = `INSERT INTO eps (id, nombre)
-				VALUES (seq_eps.NEXTVAL, :nombre)`;
-    await BD.executeQuery(
-      sql,
-      {
-        nombre,
-      },
-      true
-    );
+    const sql = `INSERT INTO eps (nombre)
+				VALUES ($1)`;
+    await BD.executeQuery(sql, [nombre], true);
     res.json({
       message: "EPS creada correctamente",
     });
@@ -31,8 +25,8 @@ epsCtrl.getEps = async (req, res) => {
     const sql = `SELECT * FROM eps`;
     const result = await BD.executeQuery(sql, [], false);
     const eps = result.rows.map((eps) => ({
-      id: eps[0],
-      nombre: eps[1],
+      id: eps.id,
+      nombre: eps.nombre,
     }));
     res.json(eps);
   } catch (error) {
@@ -62,8 +56,8 @@ epsCtrl.updateEps = async (req, res) => {
   const epsId = req.params.id;
   const { nombre } = req.body;
   try {
-    const sql = `UPDATE eps SET nombre = :nombre WHERE id = :epsId`;
-    await BD.executeQuery(sql, { epsId, nombre }, true);
+    const sql = `UPDATE eps SET nombre = $1 WHERE id = $2`;
+    await BD.executeQuery(sql, [nombre, epsId], true);
     res.json({
       message: "EPS actualizada correctamente",
     });

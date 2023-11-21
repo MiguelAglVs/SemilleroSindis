@@ -1,11 +1,11 @@
 const { Pool } = require("pg");
 
 const DbConfig = {
-  user: "kuarkezn",
-  password: "EuTfZIdWku5oO2-IpraQe6oTbYnlLhGF",
-  host: "cornelius.db.elephantsql.com",
+  user: "Miguel",
+  password: "Miguel",
+  host: "localhost",
   port: 5432,
-  database: "kuarkezn",
+  database: "Sindis_db",
 };
 
 const pool = new Pool(DbConfig);

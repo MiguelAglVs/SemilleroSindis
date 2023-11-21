@@ -6,20 +6,15 @@ contentCtrl.createContent = async (req, res) => {
   const { ruta, usuario } = req.body;
 
   try {
-    const sql = `INSERT INTO imagenes (id, ruta, usuario)
-				  VALUES (seq_imagenes.NEXTVAL, :ruta, :usuario)`;
+    const sql = `INSERT INTO imagenes (ruta, usuario) VALUES ($1, $2) RETURNING id`;
 
-    await BD.executeQuery(
-      sql,
-      {
-        ruta,
-        usuario,
-      },
-      true
-    );
+    const result = await BD.executeQuery(sql, [ruta, usuario], true);
+
+    const nuevoId = result.rows[0].id;
 
     res.json({
       message: "Imagen subida correctamente",
+      id: nuevoId,
     });
   } catch (error) {
     console.error("Error al crear el contenido:", error);
@@ -39,26 +34,27 @@ contentCtrl.getContents = async (req, res) => {
     ORDER BY i.id DESC
     `;
 
-    const result = await BD.executeQuery(sql, {}, false);
-    const roles = result.rows.map((roles) => ({
-      id: roles[0],
-      ruta: roles[1],
-      nombre: roles[3],
+    const result = await BD.executeQuery(sql, [], false);
+
+    const imagenes = result.rows.map((imagen) => ({
+      id: imagen.id,
+      ruta: imagen.ruta,
+      nombre: imagen.nombre,
     }));
-    res.json(roles);
+
+    res.json(imagenes);
   } catch (error) {
-    console.error("Error al obtener las imagenes:", error.message);
-    res.status(500).json({ error: "Error al obtener las imagenes:" });
+    console.error("Error al obtener las imágenes:", error.message);
+    res.status(500).json({ error: "Error al obtener las imágenes:" });
   }
 };
 
 contentCtrl.deleteContent = async (req, res) => {
   const { id } = req.params;
-  console.log(id);
   try {
-    const sql = `DELETE FROM imagenes WHERE id = :id`;
+    const sql = `DELETE FROM imagenes WHERE id = $1`;
 
-    await BD.executeQuery(sql, { id }, true);
+    await BD.executeQuery(sql, [id], true);
 
     res.json({
       message: "Imagen eliminada correctamente",

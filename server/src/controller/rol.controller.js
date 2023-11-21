@@ -5,8 +5,8 @@ const rolCtrl = {};
 rolCtrl.createRol = async (req, res) => {
   const { nombre } = req.body;
   try {
-    const sql = `INSERT INTO ROLES (id, nombre)
-    VALUES (seq_roles.NEXTVAL, :nombre)`;
+    const sql = `INSERT INTO roles (nombre)
+    VALUES ($1)`;
 
     await BD.executeQuery(
       sql,
