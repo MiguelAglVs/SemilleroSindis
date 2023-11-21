@@ -60,7 +60,7 @@ const Admin = () => {
 
   const fetchUsuarios = async () => {
     try {
-      const response = await axios.get("https://sindis-1e5cd39ef443.herokuapp.com/api/admin");
+      const response = await axios.get("http://localhost:3000/api/admin");
       setUsuarios(response.data);
     } catch (error) {
       console.error("Error al obtener datos de Usuarios:", error);
@@ -69,7 +69,7 @@ const Admin = () => {
 
   useEffect(() => {
     const obtenerRoles = async () => {
-      const response = await axios.get("https://sindis-1e5cd39ef443.herokuapp.com/api/roles");
+      const response = await axios.get("http://localhost:3000/api/roles");
       setPerfiles(response.data);
     };
     obtenerRoles();
@@ -190,14 +190,12 @@ const Admin = () => {
         contrasena: values.Pass,
         perfil: selectedPerfil,
       };
-      console.log(newAdmin);
-
       try {
-        await axios.post("https://sindis-1e5cd39ef443.herokuapp.com/api/admin", newAdmin);
+        await axios.post("http://localhost:3000/api/admin", newAdmin);
         Swal.fire({
           icon: "success",
           title: "Éxito",
-          text: "Cuenta creada con éxito",
+          text: "Usuario creado con éxito",
         }).then((result) => {
           if (result.isConfirmed) {
             resetUsuario();
@@ -210,7 +208,7 @@ const Admin = () => {
         Swal.fire({
           icon: "error",
           title: "Error",
-          text: "Error al crear la cuenta.",
+          text: "Error al crear el usuario.",
         });
       }
     }
@@ -255,10 +253,8 @@ const Admin = () => {
       contrasena: editFormValues.editContrasena,
       perfil: editPerfilSlected,
     };
-
-    console.log(updatedUser);
     try {
-      await axios.put(`https://sindis-1e5cd39ef443.herokuapp.com/api/admin/${id}`, updatedUser);
+      await axios.put(`http://localhost:3000/api/admin/${id}`, updatedUser);
       await Swal.fire({
         icon: "success",
         title: "Éxito",
@@ -293,7 +289,7 @@ const Admin = () => {
 
     if (confirmation.isConfirmed) {
       try {
-        await axios.delete(`https://sindis-1e5cd39ef443.herokuapp.com/api/admin/${id}`);
+        await axios.delete(`http://localhost:3000/api/admin/${id}`);
         await Swal.fire("Eliminado", "El usuario ha sido eliminado", "success");
         fetchUsuarios();
       } catch (error) {
@@ -348,17 +344,17 @@ const Admin = () => {
                       <td>{Usuario.correo}</td>
                       <td>{Usuario.perfil}</td>
                       <td>
-                        <div className="btn-group w-100">
+                        <div className="btn-group d-flex justify-content-center">
                           <button
                             type="button"
-                            className="btn btn-primary"
+                            className="btn btn-primary btn-sm"
                             onClick={() => handleEdit(Usuario.dni)}
                           >
                             <i className="fa-solid fa-pen-to-square"></i>
                           </button>
                           <button
                             type="button"
-                            className="btn btn-danger"
+                            className="btn btn-danger btn-sm"
                             onClick={() => eliminarUsuario(Usuario.dni)}
                           >
                             <i className="fa-solid fa-trash"></i>
@@ -614,7 +610,7 @@ const Admin = () => {
                   </Button>
                   <Button
                     variant="primary"
-                    disabled={perfil === 1}
+                    // disabled={perfil === 1}
                     onClick={enviarUsuario}
                   >
                     enviar

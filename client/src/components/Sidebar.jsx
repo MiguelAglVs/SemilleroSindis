@@ -8,7 +8,8 @@ const Sidebar = () => {
   const token = Cookies.get("token");
   const tokenData = JSON.parse(atob(token.split(".")[1]));
   const nombre = tokenData.nombre;
-  const nombre_rol = tokenData.nombre_rol;
+  const perfil = tokenData.perfil;
+  const nonbre_perfil = tokenData.nonbre_perfil;
 
   const [activeMenu, setActiveMenu] = useState("");
 
@@ -72,10 +73,12 @@ const Sidebar = () => {
         </div>
         <div className="head">
           <div className="user-img">
-            <img src="/assets/img/Logo.webp" alt="" />
+            <NavLink to="/">
+              <img src="/assets/img/Logo.webp" alt="" />
+            </NavLink>
           </div>
           <div className="user-details">
-            <p className="title">{nombre_rol}</p>
+            <p className="title">{nonbre_perfil}</p>
             <p className="name">{nombre}</p>
           </div>
         </div>
@@ -83,114 +86,142 @@ const Sidebar = () => {
           <div className="menu">
             <p className="title">main</p>
             <ul>
-              <li className={activeMenu === "/Dashboard" ? "active" : ""}>
-                <NavLink to="/Dashboard">
-                  <i className="fa-solid fa-house icon"></i>
-                  <span className="text">Dashboard</span>
-                </NavLink>
-              </li>
-              <li className={activeMenu === "/Dashboard/Admin" ? "active" : ""}>
-                <NavLink to="/Dashboard/Admin">
-                  <i className="fa-solid fa-user-group icon"></i>
-                  <span className="text">Usuarios</span>
-                </NavLink>
-              </li>
-              <li className={isRolesSubMenuOpen ? "active" : ""}>
-                <NavLink onClick={handleRolesClick}>
-                  <i className="fa-solid fa-id-card-clip icon"></i>
-                  <span className="text">Roles</span>
-                  <i
-                    className={`fa-solid fa-chevron-${
-                      isRolesSubMenuOpen ? "up" : "down"
-                    } arrow`}
-                  ></i>
-                </NavLink>
+              {perfil !== 1 && (
+                <>
+                  <li className={activeMenu === "/Dashboard" ? "active" : ""}>
+                    <NavLink to="/Dashboard">
+                      <i className="fa-solid fa-house icon"></i>
+                      <span className="text">Dashboard</span>
+                    </NavLink>
+                  </li>
 
-                <ul className={`sub-menu ${isRolesSubMenuOpen ? "open" : ""}`}>
                   <li
                     className={
-                      activeMenu === "/Dashboard/Roles" ? "active" : ""
+                      activeMenu === "/Dashboard/Admin" ? "active" : ""
                     }
                   >
-                    <NavLink
-                      to="/Dashboard/Roles"
-                      onClick={handleSubMenuLinkClick}
-                    >
-                      <samp className="text">Crear rol</samp>
+                    <NavLink to="/Dashboard/Admin">
+                      <i className="fa-solid fa-user-group icon"></i>
+                      <span className="text">Usuarios</span>
                     </NavLink>
                   </li>
-                  <li>
-                    <NavLink
-                      to="/Dashboard/Perfiles"
-                      onClick={handleSubMenuLinkClick}
-                    >
-                      <samp className="text">Perfiles</samp>
+                  <li className={isRolesSubMenuOpen ? "active" : ""}>
+                    <NavLink onClick={handleRolesClick}>
+                      <i className="fa-solid fa-id-card-clip icon"></i>
+                      <span className="text">Acceso</span>
+                      <i
+                        className={`fa-solid fa-chevron-${
+                          isRolesSubMenuOpen ? "up" : "down"
+                        } arrow`}
+                      ></i>
                     </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      to="/Dashboard/Permisos"
-                      onClick={handleSubMenuLinkClick}
+
+                    <ul
+                      className={`sub-menu ${isRolesSubMenuOpen ? "open" : ""}`}
                     >
-                      <samp className="text">Permisos</samp>
-                    </NavLink>
+                      <li
+                        className={
+                          activeMenu === "/Dashboard/Roles" ? "active" : ""
+                        }
+                      >
+                        <NavLink
+                          to="/Dashboard/Roles"
+                          onClick={handleSubMenuLinkClick}
+                        >
+                          <samp className="text">Crear rol</samp>
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink
+                          to="/Dashboard/Perfiles"
+                          onClick={handleSubMenuLinkClick}
+                        >
+                          <samp className="text">Perfiles</samp>
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink
+                          to="/Dashboard/Permisos"
+                          onClick={handleSubMenuLinkClick}
+                        >
+                          <samp className="text">Permisos</samp>
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink
+                          to="/Dashboard/Formularios"
+                          onClick={handleSubMenuLinkClick}
+                        >
+                          <samp className="text">Formularios</samp>
+                        </NavLink>
+                      </li>
+                    </ul>
                   </li>
-                  <li>
-                    <NavLink
-                      to="/Dashboard/Formularios"
-                      onClick={handleSubMenuLinkClick}
-                    >
-                      <samp className="text">Formularios</samp>
-                    </NavLink>
-                  </li>
-                </ul>
-              </li>
-              <li className={activeMenu === "/Dashboard/Inscription" ? "active" : ""}
+                </>
+              )}
+              <li
+                className={
+                  activeMenu === "/Dashboard/Inscription" ? "active" : ""
+                }
               >
                 <NavLink to="/Dashboard/Inscription">
                   <i className="fa-solid fa-user icon"></i>
                   <span className="text">Inscripción</span>
                 </NavLink>
               </li>
-              <li className={activeMenu === "/Dashboard/Content" ? "active" : ""}>
-                <NavLink to="/Dashboard/Content">
-                  <i className="fa-solid fa-image icon"></i>
-                  <span className="text">Contenido</span>
-                </NavLink>
-              </li>
-              <li className={isTablasSubMenuOpen ? "active" : ""}>
-                <NavLink onClick={handletablasClick}>
-                  <i className="fa-solid fa-table-cells-large icon"></i>
-                  <span className="text">Tablas</span>
-                  <i
-                    className={`fa-solid fa-chevron-${
-                      isTablasSubMenuOpen ? "up" : "down"
-                    } arrow`}
-                  ></i>
-                </NavLink>
-                <ul className={`sub-menu ${isTablasSubMenuOpen ? "open" : ""}`}>
+              {perfil !== 1 && (
+                <>
                   <li
-                    className={activeMenu === "/Dashboard/Mas" ? "active" : ""}
+                    className={
+                      activeMenu === "/Dashboard/Content" ? "active" : ""
+                    }
                   >
-                    <NavLink
-                      to="/Dashboard/Mas"
-                      onClick={handleSubMenuLinkClick}
+                    <NavLink to="/Dashboard/Content">
+                      <i className="fa-solid fa-image icon"></i>
+                      <span className="text">Contenido</span>
+                    </NavLink>
+                  </li>
+                  <li className={isTablasSubMenuOpen ? "active" : ""}>
+                    <NavLink onClick={handletablasClick}>
+                      <i className="fa-solid fa-table-cells-large icon"></i>
+                      <span className="text">Tablas</span>
+                      <i
+                        className={`fa-solid fa-chevron-${
+                          isTablasSubMenuOpen ? "up" : "down"
+                        } arrow`}
+                      ></i>
+                    </NavLink>
+                    <ul
+                      className={`sub-menu ${
+                        isTablasSubMenuOpen ? "open" : ""
+                      }`}
                     >
-                      <samp className="text">Eps</samp>
-                    </NavLink>
+                      <li
+                        className={
+                          activeMenu === "/Dashboard/Mas" ? "active" : ""
+                        }
+                      >
+                        <NavLink
+                          to="/Dashboard/Mas"
+                          onClick={handleSubMenuLinkClick}
+                        >
+                          <samp className="text">Eps</samp>
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink to="" onClick={handleSubMenuLinkClick}>
+                          <samp className="text">Diagnosticos</samp>
+                        </NavLink>
+                      </li>
+                      <li>
+                        <NavLink to="" onClick={handleSubMenuLinkClick}>
+                          <samp className="text">Discaoacidades</samp>
+                        </NavLink>
+                      </li>
+                    </ul>
                   </li>
-                  <li>
-                    <NavLink to="" onClick={handleSubMenuLinkClick}>
-                      <samp className="text">Diagnosticos</samp>
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink to="" onClick={handleSubMenuLinkClick}>
-                      <samp className="text">Discaoacidades</samp>
-                    </NavLink>
-                  </li>
-                </ul>
-              </li>
+                </>
+              )}
             </ul>
           </div>
         </div>
