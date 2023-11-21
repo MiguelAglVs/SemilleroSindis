@@ -3,7 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const Mas = () => {
+const Eps = () => {
   const [nombre, setNombre] = useState("");
   const [editNombre, setEditNombre] = useState("");
   const [epsData, setEpsData] = useState([]);
@@ -25,7 +25,7 @@ const Mas = () => {
 
   const fetchEpsData = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/eps");
+      const response = await axios.get("https://sindis-1e5cd39ef443.herokuapp.com/api/eps");
       setEpsData(response.data);
     } catch (error) {
       console.error("Error al obtener datos de EPS:", error);
@@ -35,7 +35,7 @@ const Mas = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3000/api/eps", {
+      const response = await axios.post("https://sindis-1e5cd39ef443.herokuapp.com/api/eps", {
         nombre,
       });
       Swal.fire({
@@ -57,7 +57,7 @@ const Mas = () => {
 
   const handleDelete = async (epsId) => {
     try {
-      await axios.delete(`http://localhost:3000/api/eps/${epsId}`);
+      await axios.delete(`https://sindis-1e5cd39ef443.herokuapp.com/api/eps/${epsId}`);
       Swal.fire({
         icon: "success",
         title: "¡Éxito!",
@@ -85,7 +85,7 @@ const Mas = () => {
     event.preventDefault();
     try {
       if (editEpsId) {
-        await axios.put(`http://localhost:3000/api/eps/${editEpsId}`, {
+        await axios.put(`https://sindis-1e5cd39ef443.herokuapp.com/api/eps/${editEpsId}`, {
           nombre: editNombre,
         });
         Swal.fire({
@@ -263,4 +263,4 @@ const Mas = () => {
   );
 };
 
-export default Mas;
+export default Eps;

@@ -60,7 +60,7 @@ const Admin = () => {
 
   const fetchUsuarios = async () => {
     try {
-      const response = await axios.get("http://localhost:3000/api/admin");
+      const response = await axios.get("https://sindis-1e5cd39ef443.herokuapp.com/api/admin");
       setUsuarios(response.data);
     } catch (error) {
       console.error("Error al obtener datos de Usuarios:", error);
@@ -69,7 +69,7 @@ const Admin = () => {
 
   useEffect(() => {
     const obtenerRoles = async () => {
-      const response = await axios.get("http://localhost:3000/api/roles");
+      const response = await axios.get("https://sindis-1e5cd39ef443.herokuapp.com/api/roles");
       setPerfiles(response.data);
     };
     obtenerRoles();
@@ -191,7 +191,7 @@ const Admin = () => {
         perfil: selectedPerfil,
       };
       try {
-        await axios.post("http://localhost:3000/api/admin", newAdmin);
+        await axios.post("https://sindis-1e5cd39ef443.herokuapp.com/api/admin", newAdmin);
         Swal.fire({
           icon: "success",
           title: "Éxito",
@@ -254,7 +254,7 @@ const Admin = () => {
       perfil: editPerfilSlected,
     };
     try {
-      await axios.put(`http://localhost:3000/api/admin/${id}`, updatedUser);
+      await axios.put(`https://sindis-1e5cd39ef443.herokuapp.com/api/admin/${id}`, updatedUser);
       await Swal.fire({
         icon: "success",
         title: "Éxito",
@@ -289,7 +289,7 @@ const Admin = () => {
 
     if (confirmation.isConfirmed) {
       try {
-        await axios.delete(`http://localhost:3000/api/admin/${id}`);
+        await axios.delete(`https://sindis-1e5cd39ef443.herokuapp.com/api/admin/${id}`);
         await Swal.fire("Eliminado", "El usuario ha sido eliminado", "success");
         fetchUsuarios();
       } catch (error) {

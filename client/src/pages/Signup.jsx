@@ -155,7 +155,7 @@ const Signup = () => {
       };
 
       try {
-        await axios.post("http://localhost:3000/api/register", newUser);
+        await axios.post("https://sindis-1e5cd39ef443.herokuapp.com/api/register", newUser);
         Swal.fire({
           icon: "success",
           title: "Éxito",

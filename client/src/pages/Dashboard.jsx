@@ -5,7 +5,7 @@ import Home from "./dashboard/Home";
 import Admin from "./dashboard/Admin";
 import Content from "./dashboard/Content";
 import Roles from "./dashboard/Roles";
-import Mas from "./dashboard/Mas";
+import Eps from "./dashboard/Eps";
 import Error from "./Error";
 
 import { Routes, Route } from "react-router-dom";
@@ -29,7 +29,7 @@ const Dashboard = () => {
               <Route path="Admin" exact={true} element={<Admin />} />
               <Route path="Content" exact={true} element={<Content />} />
               <Route path="Roles" exact={true} element={<Roles />} />
-              <Route path="Mas" exact={true} element={<Mas />} />
+              <Route path="Eps" exact={true} element={<Eps />} />
               <Route path="*" element={<Error />} />
             </Routes>
           </div>

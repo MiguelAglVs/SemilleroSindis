@@ -49,7 +49,7 @@ const Content = () => {
         setLoadingImages((prevLoadingImages) => [...prevLoadingImages, true]);
         const uploadedFileUrl = await uploadFile(file);
 
-        const response = await axios.post("http://localhost:3000/api/image", {
+        const response = await axios.post("https://sindis-1e5cd39ef443.herokuapp.com/api/image", {
           ruta: uploadedFileUrl,
           usuario: id,
         });
@@ -83,7 +83,7 @@ const Content = () => {
   const obtenerImagenes = async () => {
     try {
       setLoadingPage(true);
-      const response = await axios.get("http://localhost:3000/api/image");
+      const response = await axios.get("https://sindis-1e5cd39ef443.herokuapp.com/api/image");
       setImagenes(response.data);
     } catch (error) {
       console.error("Error al obtener las imágenes:", error);
@@ -110,7 +110,7 @@ const Content = () => {
       if (result.isConfirmed) {
         try {
           const response = await axios.delete(
-            `http://localhost:3000/api/image/${id}`
+            `https://sindis-1e5cd39ef443.herokuapp.com/api/image/${id}`
           );
           obtenerImagenes();
         } catch (error) {

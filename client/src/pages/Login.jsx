@@ -38,7 +38,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/login",
+        "https://sindis-1e5cd39ef443.herokuapp.com/api/login",
         login
       );
 

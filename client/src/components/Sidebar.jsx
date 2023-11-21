@@ -128,7 +128,7 @@ const Sidebar = () => {
                           to="/Dashboard/Roles"
                           onClick={handleSubMenuLinkClick}
                         >
-                          <samp className="text">Crear rol</samp>
+                          <samp className="text">Roles</samp>
                         </NavLink>
                       </li>
                       <li>
@@ -198,11 +198,11 @@ const Sidebar = () => {
                     >
                       <li
                         className={
-                          activeMenu === "/Dashboard/Mas" ? "active" : ""
+                          activeMenu === "/Dashboard/Eps" ? "active" : ""
                         }
                       >
                         <NavLink
-                          to="/Dashboard/Mas"
+                          to="/Dashboard/Eps"
                           onClick={handleSubMenuLinkClick}
                         >
                           <samp className="text">Eps</samp>
