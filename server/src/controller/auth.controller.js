@@ -14,16 +14,16 @@ authCtrl.register = async (req, res) => {
     telefono,
     correo,
     contrasena,
-    rol,
+    perfil,
   } = req.body;
   try {
     // Encriptar la contraseña antes de guardarla
     const hashedPassword = await bcrypt.hash(contrasena, 10);
 
     // Definir el valor predeterminado del rol (1 si no se proporciona un rol específico)
-    const rolPredeterminado = rol || 1;
+    const perfilPredeterminado = perfil || 1;
 
-    const sql = `INSERT INTO usuarios (dni, nombre, p_apellido, s_apellido, correo, contrasenia, direccion, telefono, perfil,estado)
+    const sql = `INSERT INTO usuarios (dni, nombre, p_apellido, s_apellido, correo, contrasenia, direccion, telefono, estado, perfil)
                  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`;
 
     await BD.executeQuery(
@@ -37,17 +37,16 @@ authCtrl.register = async (req, res) => {
         hashedPassword,
         direccion,
         telefono,
-        rolPredeterminado,
         1,
+        perfilPredeterminado,
       ],
       true
     );
 
     const token = await createAccessToken({ id: nombre });
-    // Crear un token JWT y enviarlo en la respuesta
+
     res.cookie("token", token);
 
-    // Agregar el valor del rol a la respuesta
     res.json({
       message: "Usuario creado correctamente",
     });

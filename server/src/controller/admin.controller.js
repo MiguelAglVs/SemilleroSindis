@@ -42,12 +42,12 @@ adminCtrl.createAdmin = async (req, res) => {
     telefono,
     correo,
     contrasena,
-    rol,
+    perfil,
   } = req.body;
   try {
     const hashedPassword = await bcrypt.hash(contrasena, 10);
 
-    const rolPredeterminado = rol || 1;
+    const perfilPredeterminado = perfil || 1;
 
     const sql = `INSERT INTO usuarios (dni, nombre, p_apellido, s_apellido, correo, contrasenia, direccion, telefono, estado, perfil)
                  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, 1, $9)`;
@@ -63,7 +63,7 @@ adminCtrl.createAdmin = async (req, res) => {
         hashedPassword,
         direccion,
         telefono,
-        rolPredeterminado,
+        perfilPredeterminado,
       ],
       true
     );
