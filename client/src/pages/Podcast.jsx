@@ -8,7 +8,7 @@ const Podcast = () => {
 
   const obtenerImagenes = async () => {
     try {
-      const response = await axios.get("https://sindis-1e5cd39ef443.herokuapp.com/api/image");
+      const response = await axios.get("https://sindis.onrender.com/api/image");
       setImagenes(response.data);
     } catch (error) {
       console.error("Error al obtener las imágenes:", error);

@@ -38,7 +38,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "https://sindis-1e5cd39ef443.herokuapp.com/api/login",
+        "https://sindis.onrender.com/api/login",
         login
       );
 

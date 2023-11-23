@@ -25,7 +25,7 @@ const Eps = () => {
 
   const fetchEpsData = async () => {
     try {
-      const response = await axios.get("https://sindis-1e5cd39ef443.herokuapp.com/api/eps");
+      const response = await axios.get("https://sindis.onrender.com/api/eps");
       setEpsData(response.data);
     } catch (error) {
       console.error("Error al obtener datos de EPS:", error);
@@ -35,7 +35,7 @@ const Eps = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post("https://sindis-1e5cd39ef443.herokuapp.com/api/eps", {
+      const response = await axios.post("https://sindis.onrender.com/api/eps", {
         nombre,
       });
       Swal.fire({
@@ -57,7 +57,7 @@ const Eps = () => {
 
   const handleDelete = async (epsId) => {
     try {
-      await axios.delete(`https://sindis-1e5cd39ef443.herokuapp.com/api/eps/${epsId}`);
+      await axios.delete(`https://sindis.onrender.com/api/eps/${epsId}`);
       Swal.fire({
         icon: "success",
         title: "¡Éxito!",
@@ -85,7 +85,7 @@ const Eps = () => {
     event.preventDefault();
     try {
       if (editEpsId) {
-        await axios.put(`https://sindis-1e5cd39ef443.herokuapp.com/api/eps/${editEpsId}`, {
+        await axios.put(`https://sindis.onrender.com/api/eps/${editEpsId}`, {
           nombre: editNombre,
         });
         Swal.fire({
